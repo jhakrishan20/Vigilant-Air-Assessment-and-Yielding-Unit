@@ -13,6 +13,7 @@ import {
   ArcElement,
 } from "chart.js";
 import User from "../assets/profile1.png";
+// import { useNavigate, Navigate } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
@@ -90,6 +91,11 @@ const options = {
   },
 };
 
+const option = {
+  responsive: true,
+  maintainAspectRatio: false, // Allows the height to be set independently of the width
+};
+
 // Air quality data for cards
 const airQualityData = [
   { label: "PM 2.5", value: 9, unit: "µg/m³", color: "bg-blue-400" },
@@ -99,12 +105,26 @@ const airQualityData = [
   { label: "SO 2", value: 9, unit: "ppb", color: "bg-blue-400" },
   { label: "NO 2", value: 9, unit: "ppb", color: "bg-blue-400" },
   { label: "CO", value: 9, unit: "µg/m³", color: "bg-red-400" },
+  { label: "CO", value: 9, unit: "µg/m³", color: "bg-red-400" },
+  { label: "CO", value: 9, unit: "µg/m³", color: "bg-red-400" },
 ];
 
 export default function App() {
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (true) {
+  //     navigate("/about");
+  //   }
+  // }, [navigate]);
+
+  // if (true) {
+  //   return <Navigate to="/about" />;
+  // }
+
   return (
-    <div className="min-h-screen bg-gray-100 p-4 w-fit">
-      <div className="flex justify-end items-end gap-10 2xl:gap-20">
+    <div className="min-h-screen bg-gray-100 p-4 w-end ml-44">
+      <div className="flex justify-end items-end gap-10 2xl:gap-20 -m-3">
         <div className="flex items-end gap-2">
           <img
             src={User}
@@ -113,12 +133,12 @@ export default function App() {
           />
           <div className="cursor-pointer">
             <p className="text-lg font-medium text-black">skyGuardians</p>
-            <span className="text-sm text-gray-70">skygaurdians@gmail.com</span>
+            <span className="text-xs text-gray-70">skygaurdians@gmail.com</span>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-hidden gap-4 mt-6 w-full">
         {/* AQI Card */}
         <div className="bg-yellow-200 p-6 rounded-lg shadow-md w-full">
           <div className="flex justify-between items-center">
@@ -153,12 +173,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* Historical Data Chart */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold mb-4">Historical Data</h3>
-          <Bar data={data} />
-        </div>
-
         {/* Air Quality Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {airQualityData.map((item, index) => (
@@ -184,81 +198,11 @@ export default function App() {
           ))}
         </div>
 
-        {/* Indoor/Outdoor Comparison */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold mb-4">Indoor vs Outdoor AQI</h3>
-          <div className="flex flex-col-2 gap-3">
-          <table className="w-56 border-2 border-slate-500">
-            <thead>
-              <tr className="border-2 border-slate-500">
-                <th className="text-center border-e-2 border-slate-500">Indoor</th>
-                <th></th>
-                <th className="text-center border-s-2 border-slate-500">Outdoor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-2 border-slate-500">
-                <td className="text-center border-e-2 border-slate-500">589</td>
-                <td className="bg-gray-200 text-black px-4 py-2 text-center">
-                  AQI
-                </td>
-                <td className="text-center border-s-2 border-slate-500">17</td>
-              </tr>
-              <tr className="border-2 border-slate-500">
-                <td className="text-center border-e-2 border-slate-500">28°C</td>
-                <td className="bg-gray-200 text-black px-4 py-2 text-center">
-                  Temp
-                </td>
-                <td className="text-center border-s-2 border-slate-500">22°C</td>
-              </tr>
-              <tr className="border-2 border-slate-500">
-                <td className="text-center border-e-2 border-slate-500">458</td>
-                <td className="bg-gray-200 text-black px-4 py-2 text-center">
-                  Hum
-                </td>
-                <td className="text-center border-s-2 border-slate-500">12</td>
-              </tr>
-              <tr className="border-2 border-slate-500">
-                <td className="text-center border-e-2 border-slate-500">29</td>
-                <td className="bg-gray-200 text-black px-4 py-2 text-center">
-                  PM 2.5
-                </td>
-                <td className="text-center border-s-2 border-slate-500">19</td>
-              </tr>
-              <tr className="border-2 border-slate-500">
-                <td className="text-center border-e-2 border-slate-500">123</td>
-                <td className="bg-gray-200 text-black px-4 py-2 text-center">
-                  PM 10
-                </td>
-                <td className="text-center border-s-2 border-slate-500">13</td>
-              </tr>
-            </tbody>
-          </table>
-          <table className="border-2 border-slate-500">
-            <thead>
-              <tr>
-                <th className="text-left">Average AQI</th>
-              </tr>
-            </thead>
-            <tbody className="border2 border-slate-500">
-              <tr className="border-2 border-slate-500">
-                <td>This Device</td>
-                <td>AQI 43</td>
-              </tr>
-              <tr className="border-2 border-slate-500">
-                <td>City</td>
-                <td>AQI 201</td>
-              </tr>
-              <tr className="border-2 border-slate-500">
-                <td>State</td>
-                <td>AQI 105</td>
-              </tr>
-              <tr className="border-2 border-slate-500">
-                <td>Country</td>
-                <td>AQI 168</td>
-              </tr>
-            </tbody>
-          </table>
+        {/* Historical Data Bar Chart */}
+        <div className="bg-white p-6 rounded-lg shadow-md" style={{width: "100%"}}>
+          <h3 className="text-lg font-semibold mb-4">Historical Data</h3>
+          <div style={{ height: "260px", width: "100%" }}>       {/* Set the height here */}
+            <Bar data={data} options={option} />
           </div>
         </div>
 
