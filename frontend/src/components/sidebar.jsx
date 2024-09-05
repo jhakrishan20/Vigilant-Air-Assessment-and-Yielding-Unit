@@ -1,14 +1,11 @@
 import { 
-    ChevronFirst, 
-    ChevronLast, 
-    MoreVertical 
+  ChevronFirst, 
+  ChevronLast 
 } from "lucide-react";
-import logo from "../assets/logo1.png";
-import profile from "../assets/profile1.png";
 import { 
-    createContext, 
-    useContext, 
-    useState 
+  createContext, 
+  useContext, 
+  useState 
 } from "react";
 import {
   LayoutDashboard,
@@ -17,9 +14,9 @@ import {
   TriangleAlert,
   LogOut,
   MapPinCheck,
-  LifeBuoy,
   Settings,
 } from "lucide-react";
+import Logo from "../assets/LOGO.png";
 
 const SidebarContext = createContext();
 
@@ -28,53 +25,55 @@ export default function Sidebar({ children }) {
 
   return (
     <>
-      <aside className="bg-white border-r shadow-sm"
-      style={{
-        width: expanded ? "180px" : "60px",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        height: "100vh",
-        zIndex: 1000,
-      }}>
+      <aside
+        className="bg-white border-r shadow-sm"
+        style={{
+          width: expanded ? "180px" : "60px",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          height: "100vh",
+          zIndex: 1000,
+        }}
+      >
         <nav
           className="h-full flex flex-col bg-white border-r shadow-sm"
           style={{ width: expanded ? "180px" : "60px" }}
         >
-          <div className="p-4 pb-2 flex justify-between items-center">
-            <img
-              src={logo}
-              className={`overflow-hidden transition-all ${
-                expanded ? "w-24" : "w-0"
-              }`}
-            />
-            {/* <button
+          <div
+            className={`p-4 pb-2 flex items-center ${
+              expanded ? "justify-between" : "flex-col justify-center"
+            }`}
+          >
+            <button
               onClick={() => setExpanded((curr) => !curr)}
-              className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
+              className={`p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 transition-all ${
+                expanded ? "self-start" : "mb-4"
+              }`}
             >
               {expanded ? <ChevronFirst /> : <ChevronLast />}
-            </button> */}
+            </button>
+            <img
+              src={Logo}
+              className={`transition-all ${expanded ? "w-24" : "w-8 mt-4"}`}
+            />
           </div>
 
           <SidebarContext.Provider value={{ expanded }}>
             <ul className="flex-1 px-3">{children}</ul>
           </SidebarContext.Provider>
 
-          <div className="border-t flex p-3">
-            <img src={profile} className="w-8 h-8 rounded-md" />
-            <div
-              className={`flex justify-between items-center overflow-hidden transition-all ${
-                expanded ? "w-40 ml-2" : "w-0"
-              }`}
-            >
-              <div className="leading-4">
-                <h4 className="font-semibold text-xs">skyGuardians</h4>
-                <span className="text-xs text-gray-600">
-                  skyGuardians@gmail.com
-                </span>
-              </div>
-              <MoreVertical size={20} />
-            </div>
+          <div className="flex flex-col mt-auto p-3">
+            {expanded && (
+              <button
+                onClick={() => console.log("Logging out...")}
+                className="flex items-center p-2 rounded-lg hover:bg-gray-200 text-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500"
+                aria-label="Logout"
+              >
+                <LogOut size={20} className="mr-2" />
+                <span className="hidden sm:inline">Logout</span>
+              </button>
+            )}
           </div>
         </nav>
       </aside>
@@ -94,7 +93,12 @@ export function SidebarItem({ icon, text, active, alert, onClick }) {
       }`}
       onClick={onClick}
     >
-      {icon}
+      <span
+        className={`mr-2 ${expanded ? "text-2xl" : "text-xl"}`}
+        style={{ color: "" }}
+      >
+        {icon}
+      </span>
       <span
         className={`overflow-hidden transition-all ${
           expanded ? "w-40 ml-2" : "w-0"
@@ -102,13 +106,13 @@ export function SidebarItem({ icon, text, active, alert, onClick }) {
       >
         {text}
       </span>
-      {alert && (
+      {/* {alert && (
         <div
           className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${
             expanded ? "" : "top-2"
           }`}
         ></div>
-      )}
+      )} */}
 
       {!expanded && (
         <div
@@ -159,25 +163,11 @@ export function SidebarMenu() {
       path: "/alerts",
     },
     {
-      icon: <LogOut size={20} />,
-      text: "Logout",
-      alert: false,
-      active: false,
-      path: "/logout",
-    },
-    {
       icon: <Settings size={20} />,
       text: "Settings",
       alert: false,
       active: false,
       path: "/settings",
-    },
-    {
-      icon: <LifeBuoy size={20} />,
-      text: "Help",
-      alert: false,
-      active: false,
-      path: "/help",
     },
   ]);
 
