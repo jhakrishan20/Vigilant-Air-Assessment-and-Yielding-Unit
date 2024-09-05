@@ -3,6 +3,7 @@ import Sidebar, { SidebarMenu } from "./components/sidebar";
 import Dashboard from "./components/dashboard";
 import HomePage from "./components/homepage";
 import About from "./components/about";
+import LoginSignUp from "./components/login";
 
 function App() {
   return (
@@ -14,8 +15,10 @@ function App() {
           <div className="flex-grow">
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/LoginSignUp" element={<LoginSignUp />} />
               <Route path="/about" element={<About />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              
             </Routes>
           </div>
       </Router>

@@ -1,13 +1,12 @@
 import { 
-  ChevronFirst, 
-  ChevronLast 
-} from "lucide-react";
-import { 
   createContext, 
   useContext, 
-  useState 
+  useState, 
+  useEffect 
 } from "react";
 import {
+  ChevronFirst, 
+  ChevronLast, 
   LayoutDashboard,
   Home,
   StickyNote,
@@ -21,7 +20,14 @@ import Logo from "../assets/LOGO.png";
 const SidebarContext = createContext();
 
 export default function Sidebar({ children }) {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(() => {
+    const savedState = localStorage.getItem("sidebar-expanded");
+    return savedState ? JSON.parse(savedState) : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("sidebar-expanded", JSON.stringify(expanded));
+  }, [expanded]);
 
   return (
     <>
@@ -106,13 +112,6 @@ export function SidebarItem({ icon, text, active, alert, onClick }) {
       >
         {text}
       </span>
-      {/* {alert && (
-        <div
-          className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${
-            expanded ? "" : "top-2"
-          }`}
-        ></div>
-      )} */}
 
       {!expanded && (
         <div

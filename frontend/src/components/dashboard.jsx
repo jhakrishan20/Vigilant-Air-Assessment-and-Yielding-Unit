@@ -1,9 +1,5 @@
 import React from "react";
-import { 
-  Line, 
-  Bar,   
-  Pie 
-} from "react-chartjs-2";
+import { Line, Bar, Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -17,7 +13,6 @@ import {
   ArcElement,
 } from "chart.js";
 import Drone from "../assets/drone.png";
-// import { useNavigate, Navigate } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
@@ -81,6 +76,7 @@ const pieData = {
 
 const options = {
   responsive: true,
+  maintainAspectRatio: false, // Disable aspect ratio maintenance
   plugins: {
     legend: {
       position: "top",
@@ -97,19 +93,17 @@ const options = {
 
 const option = {
   responsive: true,
-  maintainAspectRatio: false, // Allows the height to be set independently of the width
+  maintainAspectRatio: false,
 };
 
 // Air quality data for cards
 const airQualityData = [
   { label: "PM 2.5", value: 9, unit: "µg/m³", color: "bg-blue-400" },
   { label: "PM 10", value: 9, unit: "µg/m³", color: "bg-green-400" },
-  { label: "TEMP", value: 27, unit: "°C", color: "bg-red-400" },
-  { label: "Humidity", value: 94, unit: "%", color: "bg-yellow-400" },
   { label: "SO 2", value: 9, unit: "ppb", color: "bg-blue-400" },
   { label: "NO 2", value: 9, unit: "ppb", color: "bg-blue-400" },
   { label: "CO", value: 9, unit: "µg/m³", color: "bg-red-400" },
-  { label: "CO", value: 9, unit: "µg/m³", color: "bg-red-400" },
+  { label: "NH3", value: 9, unit: "µg/m³", color: "bg-red-400" },
 ];
 
 const datas = [
@@ -127,7 +121,7 @@ const datas = [
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="lucide lucide-gauge text-yellow-500" 
+        className="lucide lucide-gauge text-yellow-500"
       >
         <path d="m12 14 4-4" />
         <path d="M3.34 19a10 10 0 1 1 17.32 0" />
@@ -212,18 +206,6 @@ const ICON_STYLES = [
 ];
 
 export default function App() {
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (true) {
-  //     navigate("/about");
-  //   }
-  // }, [navigate]);
-
-  // if (true) {
-  //   return <Navigate to="/about" />;
-  // }
-
   return (
     <div
       className="min-h-screen p-4 w-end ml-14"
@@ -231,8 +213,11 @@ export default function App() {
     >
       <div className="flex justify-between items-center gap-10 2xl:gap-20 -m-3">
         {/* Search Bar */}
-        <div className="flex items-center bg-white border rounded-full ml-5 px-4 py-1 gap-5 shadow-md" style={{ width: "600px"}}>
-        <button
+        <div
+          className="flex items-center bg-white border rounded-full ml-5 px-4 py-1 gap-5 shadow-md"
+          style={{ width: "600px" }}
+        >
+          <button
             className="bg-gray-200 rounded-full p-2 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
             aria-label="Search"
           >
@@ -322,34 +307,34 @@ export default function App() {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center justify-between gap-3 2xl:gap-30 my-5">
-          {datas.map((item, index) => (
-            <div
-              key={index + item.label}
-              className="w-64 2xl:min-w-60 h-16 flex items-center justify-between gap-5 px-4 py-8 rounded-lg bg-gray-100 border-2 border-slate-500"
-            >
-              <div className="flex items-center gap-2">
-                <div
-                  className={`w-8 h-8 flex items-center justify-center rounded-full ${ICON_STYLES[index]}`}
-                >
-                  {item.icon}
-                </div>
-                <div>
-                  <span className="text-gray-600 text-base md:text-base">
-                    {item.label}
-                  </span>
-                  <p className="text-base 2xl:text-2xl font-medium text-black ">
-                    {item.amount}
-                  </p>
-                </div>
+      <div className="flex flex-col md:flex-row items-center justify-between 2xl:gap-30 my-5">
+        {datas.map((item, index) => (
+          <div
+            key={index + item.label}
+            className="w-64 2xl:min-w-60 h-12 flex items-center justify-between px-4 py-8 rounded-lg bg-gray-100 border-2 border-slate-500"
+          >
+            <div className="flex items-center gap-2">
+              <div
+                className={`w-8 h-8 flex items-center justify-center rounded-full ${ICON_STYLES[index]}`}
+              >
+                {item.icon}
+              </div>
+              <div>
+                <span className="text-gray-600 text-base md:text-base">
+                  {item.label}
+                </span>
+                <p className="text-base 2xl:text-2xl font-medium text-black ">
+                  {item.amount}
+                </p>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-hidden gap-4 mt-6 w-full">
         {/* AQI Card */}
-        <div className="bg-yellow-200 p-6 rounded-lg shadow-md w-full">
+        <div className="bg-yellow-200 p-6 rounded-lg shadow-md h-72 w-full">
           <div className="flex justify-between items-center">
             <div>
               <p className="text-sm text-gray-600">18, AUG, 2022 | 6:00 PM</p>
@@ -362,12 +347,12 @@ export default function App() {
               className="w-20 h-20 object-cover"
             />
           </div>
-          <div className="mt-6">
+          <div>
             <p className="text-sm text-gray-600">AQI</p>
-            <h3 className="text-6xl font-bold text-gray-800">87</h3>
-            <p className="text-lg text-yellow-700">MODERATE</p>
+            <h3 className="text-xl font-bold text-gray-800">87</h3>
+            <p className="text-base text-yellow-700">MODERATE</p>
           </div>
-          <div className="mt-4 bg-white p-4 rounded-lg shadow-sm">
+          <div className="bg-white p-4 rounded-lg shadow-sm">
             <p className="text-sm font-medium text-gray-800">Real Time Data</p>
             <span className="text-xs text-gray-500">
               Last updated: Second ago
@@ -376,11 +361,11 @@ export default function App() {
         </div>
 
         {/* Air Quality Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-0 gap-x-4">
           {airQualityData.map((item, index) => (
             <div
               key={index}
-              className="bg-white p-4 rounded-lg shadow-sm flex items-center justify-between w-full"
+              className="bg-white px-4 rounded-lg shadow-sm flex items-center gap-y-0 justify-between h-28 w-full"
             >
               <div>
                 <p className="text-sm font-medium text-gray-500">
@@ -406,21 +391,24 @@ export default function App() {
           style={{ width: "100%" }}
         >
           <h3 className="text-lg font-semibold mb-4">Historical Data</h3>
-          <div style={{ height: "260px", width: "100%" }}>
+          <div style={{ height: "160px", width: "100%" }}>
             <Bar data={data} options={option} />
           </div>
         </div>
 
         {/* Particles Count Pie Chart */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold mb-4">Particles Count</h3>
+        <div
+          className="bg-white p-6 rounded-lg shadow-md"
+          style={{ height: "300px" }}
+        >
+          <h3 className="text-lg font-semibold -mt-3">Particles Count</h3>
           <Pie data={pieData} options={options} />
         </div>
 
         {/* Comparison Chart */}
-        <div className="bg-white p-6 rounded-lg shadow-md col-span-2">
-          <h3 className="text-lg font-semibold mb-4">Comparison Chart</h3>
-          <Line data={lineData} />
+        <div className="bg-white p-6 rounded-lg shadow-md col-span-2" style={{ height: "300px" }}>
+          <h3 className="text-lg font-semibold -mt-2">Comparison Chart</h3>
+          <Line data={lineData} options={options} />
         </div>
       </div>
     </div>

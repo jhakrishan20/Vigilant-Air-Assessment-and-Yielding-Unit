@@ -73,7 +73,10 @@ export default function About() {
       <div className="-mt-6">
         {/* Header Section */}
         <div className="text-center mb-12">
-        <h1 style={{ color: "#004953" }} className="text-7xl font-bold">VAAYU</h1>
+        <h1 
+          style={{ color: "#004953" }} 
+          className="text-7xl font-bold"
+        >VAAYU</h1>
           <p className="text-lg text-gray-600 mt-4">
             Learn more about our mission and the people behind this project.
           </p>
