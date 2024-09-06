@@ -16,6 +16,7 @@ import {
   Settings,
 } from "lucide-react";
 import Logo from "../assets/LOGO.png";
+import { useNavigate } from "react-router-dom";
 
 const SidebarContext = createContext();
 
@@ -87,8 +88,14 @@ export default function Sidebar({ children }) {
   );
 }
 
-export function SidebarItem({ icon, text, active, alert, onClick }) {
+export function SidebarItem({ icon, text, active, onClick, path, noNavigate }) {
   const { expanded } = useContext(SidebarContext);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (onClick) onClick();
+    if (!noNavigate) navigate(path);
+  };
 
   return (
     <li
@@ -97,7 +104,7 @@ export function SidebarItem({ icon, text, active, alert, onClick }) {
           ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
           : "hover:bg-indigo-200 hover:text-indigo-600 text-gray-600"
       }`}
-      onClick={onClick}
+      onClick={handleClick}
     >
       <span
         className={`mr-2 ${expanded ? "text-2xl" : "text-xl"}`}
@@ -132,6 +139,7 @@ export function SidebarMenu() {
       alert: true,
       active: false,
       path: "/",
+      noNavigate: false,
     },
     {
       icon: <StickyNote size={20} />,
@@ -139,6 +147,7 @@ export function SidebarMenu() {
       alert: true,
       active: false,
       path: "/about",
+      noNavigate: false,
     },
     {
       icon: <LayoutDashboard size={20} />,
@@ -146,6 +155,7 @@ export function SidebarMenu() {
       alert: false,
       active: false,
       path: "/dashboard",
+      noNavigate: false,
     },
     {
       icon: <MapPinCheck size={20} />,
@@ -153,6 +163,7 @@ export function SidebarMenu() {
       alert: false,
       active: false,
       path: "/mapview",
+      noNavigate: true, 
     },
     {
       icon: <TriangleAlert size={20} />,
@@ -160,6 +171,7 @@ export function SidebarMenu() {
       alert: false,
       active: false,
       path: "/alerts",
+      noNavigate: true,
     },
     {
       icon: <Settings size={20} />,
@@ -167,6 +179,7 @@ export function SidebarMenu() {
       alert: false,
       active: false,
       path: "/settings",
+      noNavigate: true,
     },
   ]);
 
@@ -189,6 +202,8 @@ export function SidebarMenu() {
           alert={item.alert}
           active={item.active}
           onClick={() => handleItemClick(index)}
+          path={item.path}
+          noNavigate={item.noNavigate}
         />
       ))}
     </>
