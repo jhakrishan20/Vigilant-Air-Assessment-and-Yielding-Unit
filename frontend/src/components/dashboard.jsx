@@ -247,7 +247,7 @@ export default function App() {
         {/* Notification and Help Icons */}
         <div className="flex items-center gap-4">
           <button
-            className="focus:outline-none focus:ring-2 focus:ring-gray-500"
+            className="hover:cursor-pointer"
             aria-label="Notifications"
           >
             <svg
@@ -269,7 +269,7 @@ export default function App() {
           </button>
 
           <button
-            className="focus:outline-none focus:ring-2 focus:ring-gray-500"
+            className="hover:cursor-pointer"
             aria-label="Help"
           >
             <svg
@@ -291,12 +291,23 @@ export default function App() {
           </button>
 
           {/* User Profile */}
-          <div className="flex items-end gap-2">
-            <img
-              src={Drone}
-              alt="User"
-              className="w-10 md:w-12 h-10 md:h-12 rounded-full object-cover cursor-pointer"
-            />
+          <div className="flex items-end gap-2 cursor-pointer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-circle-user"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="10" r="3" />
+              <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" />
+            </svg>
             <div className="cursor-pointer">
               <p className="text-md font-medium text-black">skyGuardians</p>
               <span className="text-xs text-gray-700">
@@ -311,7 +322,7 @@ export default function App() {
         {datas.map((item, index) => (
           <div
             key={index + item.label}
-            className="w-64 2xl:min-w-60 h-12 flex items-center justify-between px-4 py-8 rounded-lg bg-gray-100 border-2 border-slate-500"
+            className="w-80 2xl:min-w-60 h-12 flex items-center justify-between px-4 py-8 rounded-lg bg-gray-100 border-2 border-slate-500"
           >
             <div className="flex items-center gap-2">
               <div
@@ -349,7 +360,7 @@ export default function App() {
           </div>
           <div>
             <p className="text-sm text-gray-600">AQI</p>
-            <h3 className="text-xl font-bold text-gray-800">87</h3>
+            <h3 className="text-2xl font-bold text-gray-800">87</h3>
             <p className="text-base text-yellow-700">MODERATE</p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-sm">
@@ -406,7 +417,10 @@ export default function App() {
         </div>
 
         {/* Comparison Chart */}
-        <div className="bg-white p-6 rounded-lg shadow-md col-span-2" style={{ height: "300px" }}>
+        <div
+          className="bg-white p-6 rounded-lg shadow-md col-span-2"
+          style={{ height: "300px" }}
+        >
           <h3 className="text-lg font-semibold -mt-2">Comparison Chart</h3>
           <Line data={lineData} options={options} />
         </div>

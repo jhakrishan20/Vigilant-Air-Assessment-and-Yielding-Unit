@@ -107,12 +107,11 @@ export default function HomePage() {
   };
 
   return (
-    <div className="rounded-lg shadow-lg ml-14 w-end">
+    <div className="rounded-lg shadow-lg ml-14 w-end" style={{ backgroundColor: "#f6f6f4" }}>
       <div className="flex items-center justify-between">
-        <img src={Logo} className="w-44 h-16 ml-2" />
         <div
           className="flex items-center bg-white border rounded-full ml-5 px-4 py-1 gap-5 shadow-md"
-          style={{ width: "600px" }}
+          style={{ width: "400px" }}
         >
           <button
             className="bg-gray-200 rounded-full p-2 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
@@ -140,6 +139,10 @@ export default function HomePage() {
             className="bg-transparent border-none outline-none text-gray-800 placeholder-gray-400 w-full"
           />
         </div>
+        {/* <img src={Logo} className="w-44 h-16 ml-2" /> */}
+        <h1 style={{ color: "#004953" }} className="text-7xl font-bold -ml-80">
+          VAAYU
+        </h1>
         <button
           className="text-white px-4 py-2 mr-5 rounded-md focus:outline-none focus:ring-2"
           style={{ backgroundColor: "#004953" }}

@@ -7,22 +7,21 @@ import LoginSignUp from "./components/login";
 
 function App() {
   return (
-    <div className="flex">
-      <Router>
-      <Sidebar>
+    <Router>
+      <div className="flex">
+        <Sidebar>
           <SidebarMenu />
         </Sidebar>
-          <div className="flex-grow">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/LoginSignUp" element={<LoginSignUp />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              
-            </Routes>
-          </div>
-      </Router>
-    </div>
+        <main className="flex-1"> 
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/LoginSignUp" element={<LoginSignUp />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
