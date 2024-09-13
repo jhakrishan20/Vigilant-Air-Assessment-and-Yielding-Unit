@@ -108,7 +108,7 @@ export function SidebarItem({ icon, text, active, onClick, path, noNavigate }) {
     >
       <span
         className={`mr-2 ${expanded ? "text-2xl" : "text-xl"}`}
-        style={{ color: "" }}
+        style={{ color: "#115e59" }}
       >
         {icon}
       </span>

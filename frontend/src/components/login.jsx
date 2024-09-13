@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 export default function LoginSignUp() {
   const [isSignUp, setIsSignUp] = useState(false); 
@@ -8,17 +9,61 @@ export default function LoginSignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const userDetails = { email, password,confirmPassword }
 
     if (isSignUp) {
       if (password !== confirmPassword) {
         alert("Passwords do not match!");
         return;
       }
-      console.log("Sign-up:", { email, password });
-    } else {
-      console.log("Login:", { email, password });
+      
+      const resSignup = await axios.post('http://localhost:5000/api/signup', userDetails)
+      .then(res => {
+      return res.data;
+      })
+      .catch(err => {
+        if (err.response && err.response.data) {
+          return err.response.data;  
+        } else {
+          console.error('Unexpected error:', err);
+          return { success: false, message: 'An unexpected error occurred' };  
+        }
+      })
+
+      console.log(resSignup);
+
+      if(resSignup.success){
+        alert(resSignup.message)
+      }
+      else{
+        alert(resSignup.message)
+      }
+    } 
+  else {
+      
+      const resLogin = await axios.post('http://localhost:5000/api/login', userDetails)
+      .then(res => {
+      return res.data;
+      })
+      .catch(err => {
+        if (err.response && err.response.data) {
+          return err.response.data;  
+        } else {
+          console.error('Unexpected error:', err);
+          return { success: false, message: 'An unexpected error occurred' };  
+        }
+      })
+
+      console.log(resLogin);
+
+      if(resLogin.success){
+        alert(resLogin.message)
+      }
+      else{
+        alert(resLogin.message)
+      }
     }
   };
 

@@ -3,7 +3,7 @@
 
 const char* ssid = "krishan"; // Your WiFi SSID
 const char* password = "jabalpur"; // Your WiFi password
-const char* serverName = "http://192.168.129.134:4500/gasData"; // Your Node.js server endpoint
+const char* serverName = "http://192.168.129.134:5000/gasData"; // Your Node.js server endpoint
 
 WiFiClient client;
 HTTPClient http;

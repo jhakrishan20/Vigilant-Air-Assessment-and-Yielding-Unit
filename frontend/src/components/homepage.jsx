@@ -148,7 +148,7 @@ export default function HomePage() {
           style={{ backgroundColor: "#004953" }}
           onClick={handleClick}
         >
-          SignUp
+          Login
         </button>
       </div>
 
@@ -181,10 +181,10 @@ export default function HomePage() {
             }}
           >
             <div className="text-center mb-4">
-              <h3 className="text-lg font-semibold">New York, NY</h3>
-              <p className="text-gray-500">United States</p>
+              <h3 className="text-lg font-semibold">New Delhi, DL</h3>
+              <p className="text-gray-500">India</p>
             </div>
-            <AQIGauge value={20} />
+            <AQIGauge value={201} />
           </div>
 
           {/* Air Quality Forecast */}
