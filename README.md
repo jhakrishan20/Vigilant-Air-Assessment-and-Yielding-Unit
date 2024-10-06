@@ -2,7 +2,7 @@
 
 <h1>VAAYU - Vigillant Air Assessment and Yielding Unit</h1>
 
-<p><img src="https://link-to-your-logo-if-any" alt="VAAYU Logo"></p>
+<p><img src="C:\Users\krishan\Desktop\expo\vaayu" alt="VAAYU Logo"></p>
 
 <h3>Revolutionizing Air Quality Monitoring Through UAVs</h3>
 
